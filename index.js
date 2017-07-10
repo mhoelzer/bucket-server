@@ -7,6 +7,10 @@ const app = express();
 const http = require('http');
 const bodyParser = require('body-parser');
 const router = require('./router.js');
+// including this from library and havent includeed user table, so dont need /
+const mongoose = require('mongoose');
+
+mongoose.connect('mongodb://localhost:bucket/bucket');
 
 // when we call .json, the info associated w/ body of request, make sure it is json
 // */* means make sure either side is json
