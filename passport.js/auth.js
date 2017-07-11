@@ -10,7 +10,7 @@ exports.signup = function(req, res){
 	// res.send("user auth!");
 	var email = req.body.email;
 	var password = req.body.password;
-	// hit them right away with a session token√
+	// hit them right away with a session token
 	function createUserToken(user){
 		// gives date and time of that date/time in UTC
 		let timestamp = new Date().getTime()
@@ -36,6 +36,7 @@ exports.signup = function(req, res){
 		}
 		// if there is already a user, ...
 		if (existingUser){
+			// i'm a teapot. 
 			return res.status(418).send('This email is already in use');
 		}
 		let user = new User({
@@ -52,4 +53,5 @@ exports.signup = function(req, res){
 			res.json({token: createUserToken(user)})
 		})
 	})
+
 }
