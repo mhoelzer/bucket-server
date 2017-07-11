@@ -8,6 +8,13 @@ exports.signup = function(req, res){
 	// res.send("user auth!");
 	var email = req.body.email;
 	var password = req.body.password;
+	
+	// if statement that checks if there isnt an email or passowrd
+	// since not a function, just gets used as goes down
+	if(!email || !password){
+		return res.status(418).send({error: 'You need to put in an email and/or password'});
+	}
+
 	// findOne allows us to find one instance in db; can do findAll if want all
 	// should be checking for email that currently matches
 	// funciton is a callback. first is the err/condition, and second is success w/ data we work w/
