@@ -36,6 +36,19 @@ userSchema.pre('save', function(next){
 		})
 	})
 });
+
+userSchema.methods.comparePassword = function(candidatePassword, callback){
+	//this.password is our hashed and salted password
+	bcrypt.compare(candidatePassword, this.password, function(err, isMatch){
+		// if error, return to callbck w/ error
+		if(err){
+			return callback(err);
+		}
+		// otherwise, call the callback
+		callback(null, isMatch);
+	});
+}
+
 // tabel name is user and uses userSchema as outline
 let model = mongoose.model('user', userSchema)
 // what will be returned to us is the model, so when saved data, we can pass the model

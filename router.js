@@ -2,11 +2,13 @@
 // directs data to send to controlers, but first need to send data
 const Auth = require('./controllers/auth');
 // const User = require('./models/user')
-var passportService = require('./services/passport');
-var passport = require('passport');
+const passportService = require('./services/passport');
+const passport = require('passport');
 
 // By default the .authenticate method above wants to make a cookie. Since we’re using jwt, we don’t want a cookie. Hence, we set the first parameter to ‘jwt’ and the second to this: {session: false}. 
-var requireAuth = passport.authenticate('jwt', {session: false});
+const requireAuth = passport.authenticate('jwt', {session: false});
+
+const requireSignin = passport.authenticate('local', {session: false});
 
 // the app will refer to the express from the index.js
 module.exports = function(app){
@@ -19,4 +21,5 @@ module.exports = function(app){
 
 	// Auth is considered an object b/c of the . notation
 	app.post('/signup', Auth.signup)
+	app.post('/signin', requireSignin, Auth.signin);
 }
