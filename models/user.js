@@ -13,6 +13,7 @@ let userSchema = new Schema({
 	},
 	password: String
 });
+
 // before osmething gets saved in our Schema, this is where we catch passwords and encrypt them
 userSchema.pre('save', function(next){
 	// append to this user var
