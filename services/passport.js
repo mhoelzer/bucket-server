@@ -9,8 +9,8 @@ const LocalStrategy = require('passport-local');
 // usernameField: 'email'
 // const localLogin = new LocalStrategy({usernameField: 'email'}, function(email, password, done){
 // })
-const localOptions = {usernameField: 'email'};
-const localLogin = new LocalStrategy(localOptions, function(email, password, done){
+let localOptions = {usernameField: 'email'};
+let localLogin = new LocalStrategy(localOptions, function(email, password, done){
 	User.findOne({email: email}, function(err, user){
 		// if error in search, reyrun early w/ error
 		if(err){
@@ -51,8 +51,11 @@ let jwtOptions = {
 
 // create jwt strategy
 // payload parameter is the decoded jwt token. It corresponds to data gleaned from the createUserToken function in auth.js from sub & iat. That is the payload.
+// payload comes from auth createUserToken (grab user id of token then compare if same user searching for, then do verification set)
+// plyload is decoded token
 let jwtLogin = new JwtStrategy(jwtOptions, function(payload, done){
 	// look through all users and find user with the given
+	// pl.s is user id
 	User.findById(payload.sub, function(err, user){ 
 		// err will be populated if search fails
 		if(err){
@@ -63,6 +66,7 @@ let jwtLogin = new JwtStrategy(jwtOptions, function(payload, done){
 			done(null, user);
 		} else {
 			// if we cant find user w/ id, call done function without user obj
+			// no user obj
 			done(null, false);
 		}
 	});
