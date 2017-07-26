@@ -11,7 +11,9 @@ const LocalStrategy = require('passport-local');
 // })
 let localOptions = {usernameField: 'email'};
 let localLogin = new LocalStrategy(localOptions, function(email, password, done){
+	console.log("dicksss", email, password);
 	User.findOne({email: email}, function(err, user){
+		console.log("more dicks")
 		// if error in search, reyrun early w/ error
 		if(err){
 			return done(err);

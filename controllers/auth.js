@@ -57,6 +57,7 @@ exports.signup = function(req, res){
 	})
 }
 exports.signin = function(req, res, next){
+	console.log(req.body);
 	// user has already had their emial and pw authorized, so give toekn
 	res.send({token: createUserToken(req.user)})
 }
