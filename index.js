@@ -1,3 +1,4 @@
+require('dotenv').config()
 // express is web app framework and attach diff http calls
 // pulls obj out o fpackage
 const express = require('express');
@@ -11,7 +12,7 @@ const router = require('./router.js');
 const mongoose = require('mongoose');
 const cors = require('cors')
 
-mongoose.connect('mongodb://localhost:bucket/bucket');
+mongoose.connect('mongodb://admin:admin@ds055535.mlab.com:55535/bucketlist-mh');
 
 app.use(cors());
 // when we call .json, the info associated w/ body of request, make sure it is json

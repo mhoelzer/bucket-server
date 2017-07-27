@@ -22,13 +22,13 @@ module.exports = function(app){
 	})
 
 	// Auth is considered an object b/c of the . notation
-	app.post('/signup', Auth.signup)
-	app.post('/signin', requireSignin, Auth.signin);
+	app.post('/api/signup', Auth.signup)
+	app.post('/api/signin', requireSignin, Auth.signin);
 	// requireAuth is going to make sure that the post goes through passport and the JWT token gets checked
 	//  last parameter calls the addBucketList function on the BucketList variable. This will allow us to save our new post to the db. 
-	app.post('/newitem', requireAuth, BucketList.addBucketList);
-	app.get('/items', requireAuth, BucketList.fetchBucketLists);
-	app.get('/items/:id', requireAuth, BucketList.fetchBucketList);
-	app.put('/items/:id', requireAuth, BucketList.updateBucketList);
-	app.delete('/items/:id', requireAuth, BucketList.deleteBucketList);
+	app.post('/api/newitem', requireAuth, BucketList.addBucketList);
+	app.get('/api/items', requireAuth, BucketList.fetchBucketLists);
+	app.get('/api/items/:id', requireAuth, BucketList.fetchBucketList);
+	app.put('/api/items/:id', requireAuth, BucketList.updateBucketList);
+	app.delete('/api/items/:id', requireAuth, BucketList.deleteBucketList);
 }
